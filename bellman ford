@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <limits.h>
+
+#define MAX 100
+#define INF INT_MAX
+
+typedef struct {
+	int u, v, w;
+} Edge;
+
+void printPath(int parent[], int source, int vertex) {
+	int path[MAX];
+	int count = 0;
+	int current = vertex;
+
+	while (current != -1) {
+		path[count++] = current;
+		if (current == source)
+			break;
+		current = parent[current];
+	}
+
+	for (int i = count - 1; i >= 0; i--) {
+		printf("%d", path[i]);
+		if (i > 0)
+			printf("->");
+	}
+}
+
+int main() {
+	int V, E;
+	Edge edges[MAX];
+	int dist[MAX], parent[MAX];
+	int source;
+
+	scanf("%d", &V);
